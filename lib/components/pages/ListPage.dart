@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:traficdevil_test/components/pages/CurrentItemPage.dart';
 import 'package:traficdevil_test/config/api.dart';
 
 import '../../bloc/app/app_bloc.dart';
@@ -36,36 +37,32 @@ class _ListPageState extends State<ListPage> {
   Widget build(BuildContext context) {
     itemController(context);
 
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<NavigationBloc, NavigationState>(
-          listener: (context, state) {},
-        ),
-        BlocListener<AppBloc, AppState>(
-        //   listener: (context, state) {},
-        // ),
-      ],
-      child: ListView.builder(
-        // itemCount: AppState.itemsList,
-        itemCount: itemList.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.all(10.0),
-            child: CardWidget(
-              navigation: () {
-                // Handle navigation logic here
-              },
-              title: 'Your Title',
-              check: true,
-              favorites: false,
-              favoritesChange: () => {
-                BlocProvider.of<AppBloc>(context)
-                    .add(AppUpdateFavorites(itemList[index].id))
-              },
-            ),
-          );
-        },
-      ),
+    return BlocBuilder<AppBloc, AppState>(
+      builder: (context, state) {
+        return ListView.builder(
+          itemCount: state.itemsList.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.all(10.0),
+              child: CardWidget(
+                navigation: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CurrentItemPage()),
+                  );
+                },
+                title: state.itemsList[index].title,
+                check: state.itemsList[index].complated,
+                favorites: false,
+                // favorites: state.favorites[index].title,
+                favoritesChange: () {
+                  BlocProvider.of<AppBloc>(context)
+                      .add(AppUpdateFavorites(itemList[index].id));
+                },
+              ),
+            );
+          },
+        );
+      },
     );
-  }
-}
+  }}

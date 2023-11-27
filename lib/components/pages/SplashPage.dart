@@ -1,6 +1,8 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 
+import 'ListPage.dart';
+
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../bloc/app/app_bloc.dart';
 import '../../bloc/navigation/navigation_bloc.dart';
-
 
 class CurrentItemPage extends StatefulWidget {
   const CurrentItemPage({super.key});
@@ -12,30 +12,41 @@ class CurrentItemPage extends StatefulWidget {
 }
 
 class _CurrentItemPageState extends State<CurrentItemPage> {
-
   @override
   void initState() {
     super.initState();
   }
 
-  //todo create current page
   //todo add back button
-  //todo add button done
   //todo add info about todo
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener <NavigationBloc, NavigationState>(
-        listener: (context, state) {},
-        child:  Scaffold(
-            body: Column(
-              children: [
-               Center(
-
-                   child: Text('item name')),
-              ],
-            )
-        )
-    );
+    return BlocBuilder<AppBloc, AppState>(builder: (context, state) {
+      return Scaffold(
+        body: Column(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child:  Text(''),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child:  Text('Description'),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: GestureDetector(
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.black,
+                  child: Text('Done'),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
