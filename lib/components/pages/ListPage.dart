@@ -51,13 +51,14 @@ class _ListPageState extends State<ListPage> {
                     MaterialPageRoute(builder: (context) => CurrentItemPage()),
                   );
                 },
-                title: state.itemsList[index].title,
-                check: state.itemsList[index].complated,
+                label:  '',
+                // label: state.itemsList[index].title ?? '',
+                check: false,
+                // check: state.itemsList[index]!.check! ?? false,
                 favorites: false,
-                // favorites: state.favorites[index].title,
                 favoritesChange: () {
                   BlocProvider.of<AppBloc>(context)
-                      .add(AppUpdateFavorites(itemList[index].id));
+                      .add(AppUpdateFavorites(state.itemsList[index].id));
                 },
               ),
             );
@@ -65,4 +66,5 @@ class _ListPageState extends State<ListPage> {
         );
       },
     );
+
   }}

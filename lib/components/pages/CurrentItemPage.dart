@@ -24,28 +24,57 @@ class _CurrentItemPageState extends State<CurrentItemPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<AppBloc, AppState>(builder: (context, state) {
       return Scaffold(
-        body: Column(
-          children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child:  Text(''),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child:  Text('Description'),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: GestureDetector(
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.black,
-                  child: Text('Done'),
+        body: Container(
+          padding: EdgeInsets.all(20),
+          child:
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                       false ? Icons.star : Icons.arrow_back,
+                      color: Colors.black,
+                      size: 50.0,
+                    ),
+                    onPressed: ()=>{Navigator.pop(context)},
+                  ),
+                  Text('title', style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),),
+                  IconButton(
+                    icon: Icon(
+                       false ? Icons.star : Icons.star_border,
+                      color: Colors.black,
+                      size: 50.0,
+                    ),
+                    onPressed: ()=>{},
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.center,
+                child:  Text('Description'),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    width: double.infinity,
+                    color: Colors.black,
+                    child: Text('Done',
+                    style: TextStyle(color: Colors.white),),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          ),
+        )
       );
     });
   }
